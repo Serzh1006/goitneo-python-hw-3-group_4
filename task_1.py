@@ -3,6 +3,7 @@ from datetime import datetime
 
 users_birthday = [{"name":'Audrey Williams',"birthday":datetime(1974,3,17)},
 {"name":'Anna Manning',"birthday":datetime(1996,3,5)},
+{"name":'Alex Kravchenko',"birthday":datetime(1974,3,15)},
 {"name":'Ray Green',"birthday":datetime(1986,3,10)},
 {"name":'Joseph Porter',"birthday":datetime(1997,3,1)},
 {"name":'Mary Nelson',"birthday":datetime(2000,7,15)},

@@ -87,7 +87,9 @@ def main():
         elif command == 'show-birthday':
             print(show_birthday(args,book))
         elif command == 'birthdays':
-            print(birthdays(book))
+            dataBirthdays = birthdays(book)
+            for day,name in dataBirthdays.items():
+                print(f'{day}: {", ".join(name)}') 
         else: print('Invalid command.')
 
 if __name__ == "__main__":

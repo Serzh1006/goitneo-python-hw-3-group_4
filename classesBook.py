@@ -52,7 +52,7 @@ class Record:
         return f"{'; '.join(p for p in self.phones)}"
 
     def __str__(self):
-        return f"Contact name: {self.name.value}, phones: {'; '.join(p for p in self.phones)}"
+        return f"Contact name: {self.name.value}, phones: {'; '.join(p for p in self.phones)}{', birthday: ' + self.birthday.strftime('%d.%m.%Y') if self.birthday else ''}\n"
 
 class AddressBook(UserDict):
     def add_record(self,record):
@@ -69,18 +69,17 @@ class AddressBook(UserDict):
         users_list_for_birthday = defaultdict(list)
         today = datetime.today().date()
         for name,date in self.items():
-            print(f"date = {date}")
-        #     birthday_this_year = date.birthday.replace(year=today.year)
-        #     if birthday_this_year < today:
-        #         birthday_this_year = birthday_this_year.replace(year=today.year+1)
-        #     delta_days = (birthday_this_year - today).days
-        #     if delta_days < 7:
-        #         if birthday_this_year.weekday() in [5,6]:
-        #             users_list_for_birthday['Monday'].append(date['name'])
-        #         else:
-        #             weekday = birthday_this_year.strftime('%A')
-        #             users_list_for_birthday[weekday].append(date['name'])
-        # return users_list_for_birthday
+            birthday_this_year = date.birthday.date().replace(year=today.year)
+            if birthday_this_year < today:
+                birthday_this_year = birthday_this_year.replace(year=today.year+1)
+            delta_days = (birthday_this_year - today).days
+            if delta_days < 7:
+                if birthday_this_year.weekday() in [5,6]:
+                    users_list_for_birthday['Monday'].append(name)
+                else:
+                    weekday = birthday_this_year.strftime('%A')
+                    users_list_for_birthday[weekday].append(name)
+        return users_list_for_birthday
     
     def __str__(self):
         result = ''
