@@ -1,18 +1,5 @@
 from classesBook import AddressBook,Record
-
-
-def input_error(func):
-    def inner(*args,**kwargs):
-        try:
-            return func(*args,**kwargs)
-        except ValueError:
-            return "Give me name and phone please."
-        except KeyError:
-            return "Key error. The contact not found."
-        except IndexError:
-            return "Index error. Try again."
-    return inner
-
+from decorators import input_error,show_error,birthday_error
 
 @input_error
 def add_contact(args,book):
@@ -30,20 +17,20 @@ def change_contact(args,book):
         record = book.find(name)
         return record.edit_phone(old=old_phone,new=new_phone)
 
-@input_error
+@show_error
 def show_phone(args,book):
         name = args
         name = ("".join(name)).lower()
         record = book.find(name)
         return record.find_phone()
 
-@input_error
+@birthday_error
 def add_birthday(args,book):
         name, birthday = args
         record = book.find(name)
         return record.add_birthday(birthday)
 
-@input_error
+@show_error
 def show_birthday(args,book):
         name = args
         name = ("".join(name)).lower()

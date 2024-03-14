@@ -52,7 +52,7 @@ class Record:
         return f"{'; '.join(p for p in self.phones)}"
 
     def __str__(self):
-        return f"Contact name: {self.name.value}, phones: {'; '.join(p for p in self.phones)}{', birthday: ' + self.birthday.strftime('%d.%m.%Y') if self.birthday else ''}\n"
+        return f"Contact name: {self.name.value.capitalize()}, phones: {'; '.join(p for p in self.phones)}{', birthday: ' + self.birthday.strftime('%d.%m.%Y') if self.birthday else ''}\n"
 
 class AddressBook(UserDict):
     def add_record(self,record):
@@ -84,5 +84,5 @@ class AddressBook(UserDict):
     def __str__(self):
         result = ''
         for key, value in self.data.items():
-            result += f"Contact name: {key}, phones: {'; '.join(p for p in value.phones)}{', birthday: ' + value.birthday.strftime('%d.%m.%Y') if value.birthday else ''}\n"
+            result += f"Contact name: {key.capitalize()}, phones: {'; '.join(p for p in value.phones)}{', birthday: ' + value.birthday.strftime('%d.%m.%Y') if value.birthday else ''}\n"
         return result
